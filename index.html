@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <title>Manila Transit</title>
+
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+        <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
+        <script type="text/javascript" src="js/mail_send.js"></script>
+
+        
+    </head>
+
+    <body>
+        <link rel='stylesheet' href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' />
+        <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
+        <link href="css/style.css" rel="stylesheet" />
+
+        <div class="sidebar-toggle">Help improve the routes</div>
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <p>Is the route not aligned to the street properly? Is the route as shown here not accurate? You can help us improve the route network. Edit right in your browser and send us your updates.</p>
+
+                <ol>
+                <li>Choose a route you want to edit from the bus or jeepny menu. Then click <a id="edit_route" target="_newtab">here</a> to edit the chosen route.</li>
+                <li>Click on the edit icon <img src="img/edit_button.png" alt="edit button pic" /> to begin. Move the points by clicking and dragging them.</li>
+                <li>When you are done editing, you will need to save twice. First, click the edit icon again and click save there. <img src="img/edit_button_save.png" alt="edit button save pic" /> Second, from the top of the screen click Save, Gist. <img src="img/save_gist.png" alt="gist save pic" /></li>
+                <li>When you save, a message will appear and the URL will change. Copy the URL, paste it in the box below, and click "Submit Changes".</li>
+                </ol>
+
+                <form name="new_route" id="new_route">
+                    Edited route: <input type="text" name="edited_route" id ="edited_route" onchange="updateInput(this.value)">
+
+                    <button id="edit_submission" onclick="sendTheMail(); return false;">Submit Changes</button>
+                    <span class="success_message"></span>
+
+                </form>
+
+            </div>
+        </div>
+
+        <header>
+            <div class="title">Manila Transit Routes</div>
+        </header>
+
+            <div class="bus_select">
+                <span class="bus_routes">Bus Route:</span>
+                <select id='bus-ui'>
+                    <option value = 'none'>None</option>
+                    <option value='all'>All Routes</option>
+                </select>
+            </div>
+
+            <div class="jeep_select">
+                <span class="jeep_routes">Jeep Route:</span>
+                <select id='jeep-ui'>
+                    <option value = 'none'>None</option>
+                    <option value='all'>All Routes</option>
+                </select>
+            </div>
+        <div id='map'></div>
+
+        <script type="text/javascript" src = "geojson/PUB_total.geojson"></script>
+        <script type="text/javascript" src = "geojson/PUJ_total.geojson"></script>
+        <script type="text/javascript" src = "geojson/Rail.geojson"></script>
+        <script type="text/javascript" src = "js/route_handling.js"></script>
+    </body>
+</html>
