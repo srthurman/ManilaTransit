@@ -1,7 +1,25 @@
 //toggle route editing sidebar on/off
 $('.sidebar-toggle').click(function() {
-    $('.sidebar').toggle();
+    $('#header').css({
+	'height': '100%',
+	'width': '315px',
+	'border-bottom': 'none',
+	'border-right': '6px solid #350805'
+	});
+    $(this).css('display','none');
+    $('.bus_select').offset({left: 20, top: 88});
+    $('.jeep_select').offset({left: 20, top: 140});
+    $('.bus_routes, .jeep_routes').after('</br>');
+    $('.leaflet-top .leaflet-control-layers').css({
+	'margin-top': '5px'});
+    $('.leaflet-top .leaflet-draw').css({
+	'margin-top': '35px',
+	'display': 'block'});
+    
 });
+//$('.sidebar-toggle').click(function() {
+//    $('.sidebar').toggle();
+//});
 
 //get value from input box for edited route URL
 function updateInput(rval){
@@ -55,26 +73,42 @@ var overlayMaps = {
 
 L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);
 
-//construct URL for route editing
-var a = document.getElementById('edit_route');
-function update_href(route_edit) {
-    a.href = "http://geojson.io/#data=data:application/json," + route_edit;
-};
+// Initialise the FeatureGroup to store editable layers
+var drawnItems = new L.FeatureGroup();
+map.addLayer(drawnItems);
+
+// Initialise the draw control and pass it the FeatureGroup of editable layers
+var drawControl = new L.Control.Draw({
+    edit: {
+        featureGroup: drawnItems
+    },
+    position: 'topright'
+});
+
+//{position: 'bottomright'}
+map.addControl(drawControl);
+
+
+////construct URL for route editing
+//var a = document.getElementById('edit_route');
+//function update_href(route_edit) {
+//    a.href = "http://geojson.io/#data=data:application/json," + route_edit;
+//};
 
 //create select lists for all bus and jeepny routes
-var pub_dict = {}
-var puj_dict = {}
+//var pub_dict = {}
+//var puj_dict = {}
 
 for (var i = 0; i < pub_routes.features.length; i++) { 
     var route_name = pub_routes.features[i].properties['FULL_RT_NM'];
     addRoute(route_name, 'PUB', ui);
-    pub_dict[route_name] = pub_routes.features[i];
+    //pub_dict[route_name] = pub_routes.features[i];
 };
 
 for (var i = 0; i < puj_routes.features.length; i++) { 
     var route_name = puj_routes.features[i].properties['FULL_RT_NM'];
     addRoute(route_name, 'PUJ', ui2);
-    puj_dict[route_name] = puj_routes.features[i];
+    //puj_dict[route_name] = puj_routes.features[i];
 };
 
 function addRoute(rname, classname, element) {
@@ -102,7 +136,6 @@ $("#bus-ui").change(function() {
         resetRoute("#jeep-ui option:eq(0)", featj);
         return f.properties['FULL_RT_NM'] === selected;
     });
-    update_href(encodeURIComponent(JSON.stringify(pub_dict[selected])));
     //console.log(pub_dict[selected]);
     map.fitBounds(featb.getBounds());
 });
@@ -120,7 +153,6 @@ $("#jeep-ui").change(function() {
         resetRoute("#bus-ui option:eq(0)", featb);
         return f.properties['FULL_RT_NM'] === selected;
     });
-    update_href(encodeURIComponent(JSON.stringify(puj_dict[selected])));
     //console.log(puj_dict[selected]);
     map.fitBounds(featj.getBounds());    
 });

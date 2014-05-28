@@ -1,6 +1,11 @@
+html {
+   height: 100%;
+}
+
 body {
    margin:0;
    padding:0;
+   height: 100%;
 }
 
 #header {
@@ -75,8 +80,12 @@ li {
     z-index: -2;
 }
 
-.leaflet-top .leaflet-control {
+.leaflet-top .leaflet-control-layers {
     margin-top: 97px;
+}
+
+.leaflet-top .leaflet-draw {
+   display: none;
 }
 
 span {
