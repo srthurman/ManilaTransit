@@ -19,7 +19,7 @@ $('#edit_submission').click(function() {
 
 //declare map and layers. Add UI elements
 var map = L.map('map', {zoomControl: false}).setView([14.6, 121.01], 11);
-map.addLayer(L.mapbox.tileLayer('examples.map-zgrqqx0w'));
+map.addLayer(L.mapbox.tileLayer('srthurman.ib0e160e'));
 
 new L.Control.Zoom({position: 'bottomright'}).addTo(map);
 
@@ -129,4 +129,3 @@ function resetRoute(uioption, feature) {
     $(uioption).prop('selected',true);
     feature.setFilter(function() { return false; });
 };
-
