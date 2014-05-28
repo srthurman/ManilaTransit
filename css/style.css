@@ -84,7 +84,7 @@ li {
     margin-top: 97px;
 }
 
-.leaflet-top .leaflet-draw {
+.leaflet-top .leaflet-draw div.leaflet-draw-section {
    display: none;
 }
 

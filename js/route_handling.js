@@ -12,7 +12,7 @@ $('.sidebar-toggle').click(function() {
     $('.bus_routes, .jeep_routes').after('</br>');
     $('.leaflet-top .leaflet-control-layers').css({
 	'margin-top': '5px'});
-    $('.leaflet-top .leaflet-draw').css({
+    $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').css({
 	'margin-top': '35px',
 	'display': 'block'});
     
