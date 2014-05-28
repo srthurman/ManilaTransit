@@ -11,9 +11,13 @@ body {
    top:0;
    left:0;
    z-index: -1;
+   height: 136px;
 }
 
-#header div {
+.title,
+.subtitle,
+.bus_select,
+.jeep_select {
   text-align: center;
 }
 
@@ -83,7 +87,15 @@ span {
 .jeep_select {
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   color: #350805;
-  margin-bottom: 5px;
+  position: relative;
+}
+
+.bus_select {
+bottom: 100px;
+}
+
+.jeep_select {
+bottom: 97px;
 }
 
 select {
@@ -131,7 +143,6 @@ select {
   position: absolute;
   top: 49px;
   left: 677px;
-  width: 178px;
   height: 20px;
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   color: #350805;
@@ -154,13 +165,13 @@ span {
 }
 
 .bus_select {
-  left: 300px;
-  top: 15px;
+  left: 282px;
+  top: 11px;
 }
 
 
 .jeep_select {
-  left: 293px;
+  left: 275px;
   top: 45px;
 }
 
