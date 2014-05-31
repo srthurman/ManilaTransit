@@ -15,32 +15,37 @@
         <link rel='stylesheet' href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' />
         <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
         <link href="css/style.css" rel="stylesheet" />
-
-        <div id="header">
+      
+  <div id="header">
             <div class="title">Manila Transit</div>
             <div class="subtitle">Route Viewer and Editor</div>
-        </div>
+    </div>
 
-	    <div class="bus_select">
+  <div class="bus_select">
                 <span class="bus_routes">Bus Route:</span>
                 <select id='bus-ui'>
                     <option value = 'none'>None</option>
                     <option value='all'>All Routes</option>
                 </select>
-            </div>
+    </div>
 
-            <div class="jeep_select">
+  <div class="jeep_select">
                 <span class="jeep_routes">Jeep Route:</span>
                 <select id='jeep-ui'>
                     <option value = 'none'>None</option>
                     <option value='all'>All Routes</option>
                 </select>
-            </div>
+</div>
 
-        <div class="sidebar-toggle">Edit routes</div>
-        <div class="sidebar"></div>
+  <div class="sidebar-toggle">Edit routes</div>
+<div id="container">  
+  <div id="sidebar">
+  <h1>leaflet-sidebar</h1>
+    </div>
 
-        <div id='map'></div>
+  <div id='map' class="col"></div>
+   
+</div>
 
         <script type="text/javascript" src = "geojson/PUB_total.geojson"></script>
         <script type="text/javascript" src = "geojson/PUJ_total.geojson"></script>

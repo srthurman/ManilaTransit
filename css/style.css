@@ -1,18 +1,17 @@
-html {
-   height: 100%;
+* {
+  padding: 0;
+  margin: 0;
 }
 
-body {
-   margin:0;
-   padding:0;
-   height: 100%;
+#container {
+  position: absolute;
+  width: 100%;
 }
 
 #header {
    width: 100%;
    background-color: #47A7F5;
    border-bottom: 6px solid #350805;
-   position:relative;
    top:0;
    left:0;
    z-index: -1;
@@ -24,23 +23,6 @@ body {
 .bus_select,
 .jeep_select {
   text-align: center;
-}
-
-.sidebar {
-  position: absolute;
-  top:86px;
-  right: 0;
-  width: 375px;
-  color: black;
-  background-color: white;
-  height: 70%;
-  display: none;
-  overflow-y: auto;
-  border-left-style: solid;
-  border-left-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-
 }
 
 .sidebar-toggle {
@@ -71,17 +53,14 @@ li {
    display: none;
 }
 
-
 #map {
-    position:absolute;
-    top:0;
-    bottom:0;
-    width:100%; 
-    z-index: -2;
+  float: right;
+  width: 70%;
+  height: 100%;
 }
 
 .leaflet-top .leaflet-control-layers {
-    margin-top: 97px;
+    margin-top: 10px;
 }
 
 .leaflet-top .leaflet-draw div.leaflet-draw-section {
@@ -96,7 +75,7 @@ span {
 .jeep_select {
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   color: #350805;
-  position: relative;
+  position: absolute;
 }
 
 .bus_select {
@@ -122,7 +101,6 @@ select {
    width: 100%;
    background-color: #47A7F5;
    border-bottom: 6px solid #350805;
-   position:relative;
    top:0;
    left:0;
    z-index: -1;
@@ -158,10 +136,33 @@ select {
 }
 
 .sidebar-toggle:hover {
-padding-bottom: 8px;
-border-bottom: 3px solid #350805;
-cursor: pointer;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #350805;
+  cursor: pointer;
 }
+
+#sidebar {
+  position: absolute;
+  float: left;
+  width: 30%;
+  height: 100%;
+}
+
+/* #sidebar {
+  position: relative;
+  float: left;
+  width: 35%;
+  height: 100%;
+  top:86px;
+  left: 0;
+  color: black;
+  background-color: gray;
+  height: 100%;
+  overflow-y: auto;
+  display:none;
+} */
+
+
 
 span {
   display: inline;
@@ -182,6 +183,6 @@ span {
 .jeep_select {
   left: 275px;
   top: 45px;
-}
+}  
 
 }

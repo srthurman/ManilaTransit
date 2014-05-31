@@ -1,38 +1,12 @@
-//toggle route editing sidebar on/off
-$('.sidebar-toggle').click(function() {
-    $('#header').css({
-	'height': '100%',
-	'width': '315px',
-	'border-bottom': 'none',
-	'border-right': '6px solid #350805'
-	});
-    $(this).css('display','none');
-    $('.bus_select').offset({left: 20, top: 88});
-    $('.jeep_select').offset({left: 20, top: 140});
-    $('.bus_routes, .jeep_routes').after('</br>');
-    $('.leaflet-top .leaflet-control-layers').css({
-	'margin-top': '5px'});
-    $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').css({
-	'margin-top': '35px',
-	'display': 'block'});
-    
+//set container height for map
+$('#container').height(function () {
+  return $(window).height() - 86;
 });
-//$('.sidebar-toggle').click(function() {
-//    $('.sidebar').toggle();
-//});
 
-//get value from input box for edited route URL
-function updateInput(rval){
-    merge_vars[0].vars[1].content = document.getElementById("edited_route").value;
-    console.log(merge_vars[0].vars[1].content);
-};
-
-$('#edit_submission').click(function() {
-    $('.success_message').text("Thank you, your edits have been submitted.");
-    setTimeout(function() {
-        $(".success_message").fadeOut().empty();
-        $('#edited_route').val('');
-    }, 5000);
+$( window ).resize(function() {
+  $('#container').height(function () {
+  	return $(window).height() - 86;
+  });
 });
 
 //declare map and layers. Add UI elements
@@ -73,6 +47,23 @@ var overlayMaps = {
 
 L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);
 
+//toggle route editing sidebar on/off
+$('.sidebar-toggle').click(function() {
+    $('#sidebar').toggle();
+	console.log($('#map').css('width'));
+	console.log($(window).width() + 'px');
+	if($('#map').css('width') === ($(window).width() + 'px')) {
+    		$('#map').css({'width': '65%'});
+	} else {
+		$('#map').css({'width': '100%'})
+	}
+    $('.leaflet-top .leaflet-control-layers').css({
+	'margin-top': '5px'});
+    $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').css({
+	'margin-top': '35px',
+	'display': 'block'});
+});
+
 // Initialise the FeatureGroup to store editable layers
 var drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
@@ -87,13 +78,6 @@ var drawControl = new L.Control.Draw({
 
 //{position: 'bottomright'}
 map.addControl(drawControl);
-
-
-////construct URL for route editing
-//var a = document.getElementById('edit_route');
-//function update_href(route_edit) {
-//    a.href = "http://geojson.io/#data=data:application/json," + route_edit;
-//};
 
 //create select lists for all bus and jeepny routes
 //var pub_dict = {}
