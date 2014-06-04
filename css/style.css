@@ -65,6 +65,7 @@ li {
 
 .leaflet-top .leaflet-draw div.leaflet-draw-section {
    display: none;
+   margin-top: '35px'
 }
 
 span {

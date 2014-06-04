@@ -52,25 +52,17 @@ L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);
 //toggle route editing sidebar on/off
 $('.sidebar-toggle').click(function() {
     $('#sidebar').toggle();
-	console.log($('#map').width());
-	console.log($(window).width() + 'px');
+    $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').toggle();
 	if($('#map').width() === $(window).width()) {
     		$('#map').width('65%');
-            //$('#sidebar').width('35%');
 	} else {
 		$('#map').width('100%');
-        //$('#sidebar').width('0');
-	}
-    $('.leaflet-top .leaflet-control-layers').css({
-	'margin-top': '5px'});
-    $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').css({
-	'margin-top': '35px',
-	'display': 'block'});
+	};
 });
 
 // Initialise the FeatureGroup to store editable layers
-var drawnItems = new L.FeatureGroup();
-map.addLayer(drawnItems);
+var drawnItems = new L.FeatureGroup().addTo(map);
+//map.addLayer(drawnItems);
 
 // Initialise the draw control and pass it the FeatureGroup of editable layers
 var drawControl = new L.Control.Draw({
@@ -84,19 +76,20 @@ var drawControl = new L.Control.Draw({
 map.addControl(drawControl);
 
 //create select lists for all bus and jeepny routes
-//var pub_dict = {}
-//var puj_dict = {}
+var pub_dict = {}
+var puj_dict = {}
+var edit_route = {}
 
 for (var i = 0; i < pub_routes.features.length; i++) { 
     var route_name = pub_routes.features[i].properties['FULL_RT_NM'];
     addRoute(route_name, 'PUB', ui);
-    //pub_dict[route_name] = pub_routes.features[i];
+    pub_dict[route_name] = pub_routes.features[i];
 };
 
 for (var i = 0; i < puj_routes.features.length; i++) { 
     var route_name = puj_routes.features[i].properties['FULL_RT_NM'];
     addRoute(route_name, 'PUJ', ui2);
-    //puj_dict[route_name] = puj_routes.features[i];
+    puj_dict[route_name] = puj_routes.features[i];
 };
 
 function addRoute(rname, classname, element) {
@@ -113,6 +106,7 @@ function addRoute(rname, classname, element) {
 //and fits the bounds of the map to the selected route
 $("#bus-ui").change(function() {
     var selected = $("#bus-ui option:selected").val();
+    //console.log(selected);
     merge_vars[0].vars[0].content = selected;
     featb.setFilter(function(f) {
         if(selected === 'all') {
@@ -124,7 +118,8 @@ $("#bus-ui").change(function() {
         resetRoute("#jeep-ui option:eq(0)", featj);
         return f.properties['FULL_RT_NM'] === selected;
     });
-    //console.log(pub_dict[selected]);
+    edit_route = pub_dict[selected]
+    console.log(edit_route);
     map.fitBounds(featb.getBounds());
 });
 
@@ -141,6 +136,8 @@ $("#jeep-ui").change(function() {
         resetRoute("#bus-ui option:eq(0)", featb);
         return f.properties['FULL_RT_NM'] === selected;
     });
+    edit_route = puj_dict[selected]
+    console.log(edit_route);
     //console.log(puj_dict[selected]);
     map.fitBounds(featj.getBounds());    
 });
@@ -149,3 +146,9 @@ function resetRoute(uioption, feature) {
     $(uioption).prop('selected',true);
     feature.setFilter(function() { return false; });
 };
+
+
+//convert currently shown geojson route to a leaflet path layer
+//var llayer = L.GeoJSON.geometryToLayer(edit_route)
+//llayer.addTo(map)
+//llayer.addTo(drawnItems)
