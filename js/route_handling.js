@@ -1,12 +1,14 @@
 //set container height for map
-$('#container').height(function () {
-  return $(window).height() - 86;
-});
+function body_size() {
+    $('#container').height(function () {
+        return $(window).height() - $('#header').outerHeight();
+    });
+};
+
+body_size();
 
 $( window ).resize(function() {
-  $('#container').height(function () {
-  	return $(window).height() - 86;
-  });
+  body_size();
 });
 
 //declare map and layers. Add UI elements
@@ -50,12 +52,14 @@ L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);
 //toggle route editing sidebar on/off
 $('.sidebar-toggle').click(function() {
     $('#sidebar').toggle();
-	console.log($('#map').css('width'));
+	console.log($('#map').width());
 	console.log($(window).width() + 'px');
-	if($('#map').css('width') === ($(window).width() + 'px')) {
-    		$('#map').css({'width': '65%'});
+	if($('#map').width() === $(window).width()) {
+    		$('#map').width('65%');
+            //$('#sidebar').width('35%');
 	} else {
-		$('#map').css({'width': '100%'})
+		$('#map').width('100%');
+        //$('#sidebar').width('0');
 	}
     $('.leaflet-top .leaflet-control-layers').css({
 	'margin-top': '5px'});

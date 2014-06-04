@@ -55,7 +55,7 @@ li {
 
 #map {
   float: right;
-  width: 70%;
+  width: 100%;
   height: 100%;
 }
 
@@ -144,8 +144,9 @@ select {
 #sidebar {
   position: absolute;
   float: left;
-  width: 30%;
+  width: 35%;
   height: 100%;
+  display: none;
 }
 
 /* #sidebar {
