@@ -80,6 +80,7 @@ var pub_dict = {}
 var puj_dict = {}
 var edit_route = {}
 
+
 for (var i = 0; i < pub_routes.features.length; i++) { 
     var route_name = pub_routes.features[i].properties['FULL_RT_NM'];
     addRoute(route_name, 'PUB', ui);
@@ -146,6 +147,26 @@ function resetRoute(uioption, feature) {
     $(uioption).prop('selected',true);
     feature.setFilter(function() { return false; });
 };
+
+//Make select lists unavailable if edit_button pressed
+$("#edit_button").click(function() {
+    if(jQuery.isEmptyObject(edit_route) !== true) {
+        $("#jeep-ui, #bus-ui, #edit_button").prop("disabled", true);
+        $("#stop_edit_button").prop("disabled", false);
+
+        var llayer = L.GeoJSON.geometryToLayer(edit_route);
+        //llayer.addTo(map);
+        llayer.addTo(drawnItems);
+        }
+    });
+
+//Make select lists available if stop_edit_button pressed
+$("#stop_edit_button").click(function() {
+    $("#jeep-ui, #bus-ui, #edit_button").prop("disabled", false);
+    $("#stop_edit_button").prop("disabled", true);
+
+    drawnItems.clearLayers();
+    });
 
 
 //convert currently shown geojson route to a leaflet path layer
