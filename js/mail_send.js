@@ -17,7 +17,7 @@
                             },
                             {
                                 "name": "EDIT_ROUTE",
-                                "content": "http://www.google.com"
+                                "content": {}
                             }
                         ]
                     }
@@ -27,7 +27,7 @@
                 "from_email":"manila_gtfs_edits@fakeemail.com",
                 "to":[{"email":"srthurman@gmail.com"}],
                 "subject": "Manila Transit Route Edit",
-                "html": "Route *|ROUTE|* has been edited. <a href='*|EDIT_ROUTE|*'>Here's</a> the updated route.",
+                "html": "Route *|ROUTE|* has been edited.<br><br> *|EDIT_ROUTE|*",
                 "autotext": true,
                 "merge_vars": merge_vars
             }

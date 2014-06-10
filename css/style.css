@@ -130,7 +130,7 @@ select {
   display: block;
   position: absolute;
   top: 49px;
-  left: 677px;
+  left: 790px;
   height: 20px;
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   color: #350805;
@@ -148,6 +148,7 @@ select {
   width: 35%;
   height: 100%;
   display: none;
+  padding-left: 10px;
 }
 
 /* #sidebar {
@@ -164,7 +165,9 @@ select {
   display:none;
 } */
 
-
+button {
+  clear:both;
+}
 
 span {
   display: inline;
@@ -177,13 +180,13 @@ span {
 }
 
 .bus_select {
-  left: 282px;
+  left: 361px;
   top: 11px;
 }
 
 
 .jeep_select {
-  left: 275px;
+  left: 350px;
   top: 45px;
 }  
 

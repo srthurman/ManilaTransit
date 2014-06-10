@@ -11,6 +11,7 @@ $( window ).resize(function() {
   body_size();
 });
 
+
 //declare map and layers. Add UI elements
 var map = L.map('map', {zoomControl: false}).setView([14.6, 121.01], 11);
 map.addLayer(L.mapbox.tileLayer('srthurman.ib0e160e'));
@@ -152,7 +153,7 @@ function resetRoute(uioption, feature) {
 $("#edit_button").click(function() {
     if(jQuery.isEmptyObject(edit_route) !== true) {
         $("#jeep-ui, #bus-ui, #edit_button").prop("disabled", true);
-        $("#stop_edit_button").prop("disabled", false);
+        $("#stop_edit_button, #submit_edit_button").prop("disabled", false);
 
         var llayer = L.GeoJSON.geometryToLayer(edit_route);
         //llayer.addTo(map);
@@ -163,8 +164,21 @@ $("#edit_button").click(function() {
 //Make select lists available if stop_edit_button pressed
 $("#stop_edit_button").click(function() {
     $("#jeep-ui, #bus-ui, #edit_button").prop("disabled", false);
-    $("#stop_edit_button").prop("disabled", true);
+    $("#stop_edit_button, #submit_edit_button").prop("disabled", true);
 
+    drawnItems.clearLayers();
+    });
+
+//Send email with route info for edited route and clear the screen.
+$("#submit_edit_button").click(function() {
+    var e = drawnItems.getLayers()[0];
+    geoJSON_edit = e.toGeoJSON();
+    console.log(geoJSON_edit);
+    merge_vars[0].vars[1].content = JSON.stringify(geoJSON_edit);
+    sendTheMail();
+
+    $("#jeep-ui, #bus-ui, #edit_button").prop("disabled", false);
+    $("#stop_edit_button, #submit_edit_button").prop("disabled", true);
     drawnItems.clearLayers();
     });
 
