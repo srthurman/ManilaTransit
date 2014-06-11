@@ -1,3 +1,5 @@
+$(window).load(function() {
+
 //set container height for map
 function body_size() {
     $('#container').height(function () {
@@ -9,6 +11,10 @@ body_size();
 
 $( window ).resize(function() {
   body_size();
+  //if ($(window).width() < 769) {
+  //  $('#sidebar').hide();
+  //};
+  console.log($(window).width());
 });
 
 
@@ -53,7 +59,8 @@ L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);
 //toggle route editing sidebar on/off
 $('.sidebar-toggle').click(function() {
     $('#sidebar').toggle();
-    $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').toggle();
+    console.log($('#sidebar').css('display'));
+    //$('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').toggle();
 	if($('#map').width() === $(window).width()) {
     		$('#map').width('65%');
 	} else {
@@ -158,6 +165,8 @@ $("#edit_button").click(function() {
         var llayer = L.GeoJSON.geometryToLayer(edit_route);
         //llayer.addTo(map);
         llayer.addTo(drawnItems);
+
+        $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').show();
         }
     });
 
@@ -167,19 +176,23 @@ $("#stop_edit_button").click(function() {
     $("#stop_edit_button, #submit_edit_button").prop("disabled", true);
 
     drawnItems.clearLayers();
+
+    $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').hide();
     });
 
 //Send email with route info for edited route and clear the screen.
 $("#submit_edit_button").click(function() {
     var e = drawnItems.getLayers()[0];
     geoJSON_edit = e.toGeoJSON();
-    console.log(geoJSON_edit);
+    //console.log(geoJSON_edit);
     merge_vars[0].vars[1].content = JSON.stringify(geoJSON_edit);
     sendTheMail();
 
     $("#jeep-ui, #bus-ui, #edit_button").prop("disabled", false);
     $("#stop_edit_button, #submit_edit_button").prop("disabled", true);
     drawnItems.clearLayers();
+
+    $('.leaflet-top .leaflet-draw div.leaflet-draw-section:nth-child(2)').hide();
     });
 
 
@@ -187,3 +200,6 @@ $("#submit_edit_button").click(function() {
 //var llayer = L.GeoJSON.geometryToLayer(edit_route)
 //llayer.addTo(map)
 //llayer.addTo(drawnItems)
+
+
+});

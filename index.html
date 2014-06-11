@@ -43,12 +43,22 @@
     <button id="edit_button">Start Editing</button>
     <button id="stop_edit_button" disabled>Discard Edits</button>
     <button id="submit_edit_button" disabled>Submit Edits</button>
-
-    <div id="accordion">
-      <h3>First header</h3>
-      <div>First content panel</div>
-      <h3>Second header</h3>
-      <div>Second content panel</div>
+    <div id="edit_directions">
+      <h3>Directions for Editing</h3>
+      <ol>
+          <li>
+             <h4>Select a route</h4>
+             <p>Using the drop-down menus at the top of the page, select a bus or jeepny route to edit.</p> 
+          </li>
+          <li>
+             <h4>Start Editing Session</h4>
+             <p>Click the "Start Editing" button in the editing panel. This will start your editing session. Any changes you make will be discarded once you end this session.</p> 
+          </li>
+          <li>
+             <h4>Select a route</h4>
+             <p>Using the drop-down menus at the top of the page, select a bus or jeepny route to edit.</p> 
+          </li>
+      </ol>
     </div>
   </div>
 
@@ -56,9 +66,9 @@
    
 </div>
 
-        <script type="text/javascript" src = "geojson/PUB_total.geojson"></script>
-        <script type="text/javascript" src = "geojson/PUJ_total.geojson"></script>
-        <script type="text/javascript" src = "geojson/Rail.geojson"></script>
+        <script async type="text/javascript" src = "geojson/PUB_total.geojson"></script>
+        <script async type="text/javascript" src = "geojson/PUJ_total.geojson"></script>
+        <script async type="text/javascript" src = "geojson/Rail.geojson"></script>
         <script type="text/javascript" src = "js/route_handling.js"></script>
     </body>
 </html>

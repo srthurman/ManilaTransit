@@ -93,7 +93,11 @@ select {
     
 }
 
+/*////////////////////////////////////////////////
 
+MEDIA QUERY
+
+///////////////////////////////////////////////*/
 @media (min-width: 768px) {
 
 #header {
@@ -149,6 +153,8 @@ select {
   height: 100%;
   display: none;
   padding-left: 10px;
+  background-color: whitesmoke;
+  overflow-y: auto;
 }
 
 /* #sidebar {
@@ -188,6 +194,11 @@ span {
 .jeep_select {
   left: 350px;
   top: 45px;
-}  
+} 
+
+#edit_directions {
+  margin-top: 10px;
+  padding: 10px;
+} 
 
 }
